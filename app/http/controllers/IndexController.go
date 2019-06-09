@@ -1,10 +1,8 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"time"
 )
 
 type index struct {
@@ -23,14 +21,15 @@ func (i *index) before() gin.HandlerFunc {
 }
 
 func (i *index) Ping(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": fmt.Sprintf("%s", time.Now().Format("2006_01_02")),
-		"params": c.Params,
+	c.HTML(http.StatusOK, "index.html", gin.H{
+		"title" : "test",
 	})
 }
 
 func (i *index) Test(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"message": "test success",
+		"msg": "test success",
+		"message": http.Dir("my_file_system"),
+		"params": c.Params,
 	})
 }

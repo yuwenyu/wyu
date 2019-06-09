@@ -7,6 +7,7 @@ replace (
 
 	git.apache.org/thrift.git => github.com/apache/thrift v0.12.0
 	github.com/testcontainers/testcontainer-go => github.com/testcontainers/testcontainers-go v0.0.4
+	github.com/yuwenyu/kernel v0.0.0-20190606091232-e558354cf430 => /Users/wyu/Documents/Technologies/Github/repositories/yuwenyu/github.com/yuwenyu/kernel
 
 	go.etcd.io/etcd => github.com/etcd-io/etcd v3.3.13+incompatible
 
@@ -62,8 +63,9 @@ replace (
 )
 
 require (
+	github.com/gin-contrib/multitemplate v0.0.0-20190528082104-30e424939505
 	github.com/gin-gonic/gin v1.4.0
-	github.com/kr/pretty v0.1.0 // indirect
+	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
 	github.com/yuwenyu/kernel v0.0.0-20190606091232-e558354cf430
-	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	gopkg.in/ini.v1 v1.0.0-00010101000000-000000000000
 )
