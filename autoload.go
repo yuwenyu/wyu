@@ -5,15 +5,11 @@ package wyu
 
 import (
 	"fmt"
-	"log"
-	"os"
+	"path/filepath"
 
 	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
 	"github.com/yuwenyu/kernel"
-	"gopkg.in/ini.v1"
-
-	"path/filepath"
 	"wyu/routes"
 )
 
@@ -28,65 +24,27 @@ type Autoload struct {
 }
 
 func new() *Autoload {
-	kl := kernel.New()
-	return &Autoload{
-		kernel:kl,
+	kernel := kernel.New()
+	ad := &Autoload{
+		kernel:kernel,
 	}
+	return ad
 }
 
 func (ad *Autoload) running(addr string) {
 	//ad.kernel.SysLog()
 	//ad.ini("config/")
 	//ad.kernel.Ic.Dir = "config/"
-	ad.kernel.Ic.Loading()
+
+	//ad.kernel.Ic.Loading()
+	//fmt.Println(ad.kernel.Ic.SetIp("paths").K("data").String())
+	//fmt.Println(ad.kernel.Ic.SetIp("paths").K("data").In("http", []string{"http", "https"}))
+
 	r := gin.Default()
 	r.HTMLRender = ad.tpl("resources/templates")
 	ad.static(r)
 	routes.New(r).HttpRoutes()
 	r.Run(addr)
-}
-
-func (ad *Autoload) ini(dir string) {
-
-	//pathName, err := filepath.Glob(dir + "dev" + "/ini/my.ini")
-	//if (err != nil) {
-	//	panic("test error")
-	//}
-
-
-
-	pathName1, err := filepath.Glob(dir + "dev" + "/ini/*.ini")
-	log.Println(pathName1)
-	arr := make([]interface{}, len(pathName1))
-	for v := range pathName1 {
-		arr[v] = pathName1[v]
-	}
-	log.Println(arr)
-	cfg, err := ini.Load(arr[0], arr ...)
-	if err != nil {
-		fmt.Printf("Fail to read file: %v", err)
-		os.Exit(1)
-	}
-	// 典型读取操作，默认分区可以使用空字符串表示
-	log.Println(cfg.GetSection("paths"))
-	fmt.Println("App Mode Test:", cfg.Section("").Key("app_mode").String())
-	fmt.Println("App Mode:", cfg.Section("").Key("app_mode").String())
-	fmt.Println("Data Path:", cfg.Section("paths").Key("data").String())
-
-	// 我们可以做一些候选值限制的操作
-	fmt.Println("Server Protocol:",
-		cfg.Section("server").Key("protocol").In("http", []string{"http", "https"}))
-	// 如果读取的值不在候选列表内，则会回退使用提供的默认值
-	fmt.Println("Email Protocol:",
-		cfg.Section("server").Key("protocol").In("smtp", []string{"imap", "smtp"}))
-
-	// 试一试自动类型转换
-	fmt.Printf("Port Number: (%[1]T) %[1]d\n", cfg.Section("server").Key("http_port").MustInt(9999))
-	fmt.Printf("Enforce Domain: (%[1]T) %[1]v\n", cfg.Section("server").Key("enforce_domain").MustBool(false))
-
-	// 差不多了，修改某个值然后进行保存
-	//cfg.Section("").Key("app_mode").SetValue("production")
-	//cfg.SaveTo(path+"my.ini.local")
 }
 
 func (ad *Autoload) static(g *gin.Engine) {
