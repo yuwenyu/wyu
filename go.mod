@@ -7,7 +7,6 @@ replace (
 
 	git.apache.org/thrift.git => github.com/apache/thrift v0.12.0
 	github.com/testcontainers/testcontainer-go => github.com/testcontainers/testcontainers-go v0.0.4
-	github.com/yuwenyu/kernel v0.0.0-20190609151158-d0532170374b => /Users/apple/Documents/golang/github/kernel
 
 	go.etcd.io/etcd => github.com/etcd-io/etcd v3.3.13+incompatible
 
@@ -60,12 +59,4 @@ replace (
 	launchpad.net/gocheck => github.com/go-check/check v0.0.0-20180628173108-788fd7840127
 	sigs.k8s.io/structured-merge-diff => github.com/kubernetes-sigs/structured-merge-diff v0.0.0-20190426204423-ea680f03cc65
 	sigs.k8s.io/yaml => github.com/kubernetes-sigs/yaml v1.1.0
-)
-
-require (
-	github.com/gin-contrib/multitemplate v0.0.0-20190528082104-30e424939505
-	github.com/gin-gonic/gin v1.4.0
-	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a // indirect
-	github.com/yuwenyu/kernel v0.0.0-20190609151158-d0532170374b
-	gopkg.in/ini.v1 v1.0.0-00010101000000-000000000000 // indirect
 )
