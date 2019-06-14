@@ -60,3 +60,8 @@ replace (
 	sigs.k8s.io/structured-merge-diff => github.com/kubernetes-sigs/structured-merge-diff v0.0.0-20190426204423-ea680f03cc65
 	sigs.k8s.io/yaml => github.com/kubernetes-sigs/yaml v1.1.0
 )
+
+require (
+	github.com/gin-gonic/gin v1.4.0
+	github.com/yuwenyu/kernel v0.0.0-20190614104009-e045f4d0d3b8
+)

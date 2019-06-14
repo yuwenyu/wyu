@@ -1,15 +1,17 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/yuwenyu/kernel"
 )
 
 type Controller struct {
-	g *gin.Engine
+	K *kernel.Kernel
 }
 
 func NewController() *Controller {
-	return &Controller{}
+	return &Controller{
+		kernel.New(),
+	}
 }
 
 
