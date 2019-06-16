@@ -77,5 +77,27 @@ server {
 }
 ~~~
 
+## **_GitHub.com CMD_**
+~~~
+echo "# yuk" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/yuwenyu/yuk.git
 
+git push -u origin master
+…or push an existing repository from the command line
+git remote add origin https://github.com/yuwenyu/yuk.git
+git push -u origin master
+
+
+git pull origin master
+
+/**
+ * by force cover
+**/
+git fetch --all
+git reset --hard origin/master
+git pull
+~~~
 
