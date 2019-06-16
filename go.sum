@@ -53,8 +53,6 @@ github.com/syyongx/ii18n v0.0.0-20190531015407-03d063505fc9 h1:Z+6DVs/dvYGKTjmpT
 github.com/syyongx/ii18n v0.0.0-20190531015407-03d063505fc9/go.mod h1:V05c+1llt5i3SBNtdKe87IWLzFv0PPeVcxS5O9sHcSM=
 github.com/ugorji/go v1.1.4 h1:j4s+tAvLfL3bZyefP2SEWmhBzmuIlH/eqNuPdFPgngw=
 github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGrc=
-github.com/yuwenyu/kernel v0.0.0-20190614104009-e045f4d0d3b8 h1:YNMjXt38JoR3gF1bfNHjwwG8yxOFqBqRBxAfXVfVjyg=
-github.com/yuwenyu/kernel v0.0.0-20190614104009-e045f4d0d3b8/go.mod h1:JZ3IJoao2gmS6ggxq1xYHqngViKX0TtcK0kHjbMODNw=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33q108Sa+fhmuc+sWQYwY=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/go-playground/assert.v1 v1.2.1 h1:xoYuJVE7KT85PYWrN730RguIQO0ePzVRfFMXadIrXTM=

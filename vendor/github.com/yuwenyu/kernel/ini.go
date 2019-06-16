@@ -1,22 +1,22 @@
 package kernel
 
 import (
-	"fmt"
 	"path/filepath"
 
-	pkgIni"gopkg.in/ini.v1"
+	wyuIni "gopkg.in/ini.v1"
 )
 
 const strIni string = "ini"
 
 type INI interface {
 	Loading() *ini
-	K(section string, key string) *pkgIni.Key
+	K(section string, key string) *wyuIni.Key
 }
 
 type ini struct {
+	names interface{}
 	directory string
-	cfg *pkgIni.File
+	cfg *wyuIni.File
 }
 
 var _ INI = &ini{}
@@ -37,7 +37,7 @@ var _ INI = &ini{}
  * cfg.Section("").Key("app_mode").SetValue("production")
  * cfg.SaveTo(path+"my.ini.local")
  */
-func (i *ini) K(section string, key string) *pkgIni.Key {
+func (i *ini) K(section string, key string) *wyuIni.Key {
 	if i.cfg == nil {
 		panic("Error nil")
 	}
@@ -57,14 +57,13 @@ func (i *ini) K(section string, key string) *pkgIni.Key {
 
 func (i *ini) Loading() *ini {
 	var Helper Helpers = &Helper{directory:i.directory,method:strIni}
-
 	fns, err := filepath.Glob(Helper.TempCfgEnv("*"))
 	if err != nil {
-		panic(fmt.Sprintf("Error: %s", err.Error()))
+		panic(err.Error())
 	}
 
 	if len(fns) == 0 {
-		panic(fmt.Sprintf("Error: %s", err.Error()))
+		panic("No files is in the config directory.")
 	}
 
 	arrFns := make([]interface{}, len(fns))
@@ -72,12 +71,9 @@ func (i *ini) Loading() *ini {
 		arrFns[k] = fn
 	}
 
-	arrFns = append(arrFns, i.directory + "templates" + "." + strIni)
-	arrFns = append(arrFns, i.directory + "commons" + "." + strIni)
-
-	cfg, err := pkgIni.Load(arrFns[0], arrFns ...)
+	cfg, err := wyuIni.Load(arrFns[0], arrFns ...)
 	if err != nil {
-		panic(fmt.Sprintf("Error: %s", err.Error()))
+		panic(err.Error())
 	}
 
 	i.cfg = cfg

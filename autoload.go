@@ -9,7 +9,7 @@ import (
 )
 
 func init() {
-	new().running(":8081")
+	new().running()
 }
 
 type autoload struct {
@@ -22,28 +22,16 @@ func new() *autoload {
 	}
 }
 
-func (ad *autoload) running(addr string) {
+func (ad *autoload) running() {
 	r := ad.kernel.Run()
 	routes.New(r).HttpRoutes()
-	r.Run(addr)
-}
 
-//func (ad *Autoload) T() {
-//	fmt.Println(ad.kernel.I18n.T("test","cn"))
-//	//config := map[string]ii18n.Config{
-//	//	"app": {
-//	//		SourceNewFunc: ii18n.NewJSONSource,
-//	//		OriginalLang:  "en",
-//	//		BasePath:      "resources/lang",
-//	//		FileMap: map[string]string{
-//	//			"app":   "app.json",
-//	//		},
-//	//	},
-//	//}
-//	//
-//	//ii18n.NewI18N(config)
-//	//test := ii18n.T("app", "test", nil, "cn")
-//	//fmt.Println(test)
-//}
+	strPort := ad.kernel.Ini.K("common_server","port").String()
+	if strPort == "" {
+		r.Run(":8080")
+	} else {
+		r.Run(strPort)
+	}
+}
 
 

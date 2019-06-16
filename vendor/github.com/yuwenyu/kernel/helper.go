@@ -2,12 +2,27 @@ package kernel
 
 import (
 	"os"
+	"time"
 )
 
 const (
-	strCfgDirectory string = "config"
-	strVirgule string = "/"
-	strRTN string = "\n"
+	StrCD string = "config"
+	StrVirgule string = "/"
+	StrUL string = "_"
+	StrDOT string = "."
+
+	SysTimeFormat string = "2006-01-02 00:00:00"
+	SysDateFormat string = "2006-01-02"
+	DirDateFormat string = "20060102"
+)
+
+var (
+	SysTimeLocation, _ = time.LoadLocation("Asia/Shanghai")
+	MapTimeFormat map[string]string = map[string]string{
+		"STF":time.Now().Format(SysTimeFormat),
+		"SDF":time.Now().Format(SysDateFormat),
+		"DDF":time.Now().Format(DirDateFormat),
+	}
 )
 
 type Helpers interface {
@@ -15,6 +30,7 @@ type Helpers interface {
 }
 
 type Helper struct {
+	k *Kernel
 	directory string
 	method string
 }
@@ -26,5 +42,10 @@ func (h *Helper) TempCfgEnv(fn string) string {
 		panic("Error Empty Helper ...")
 	}
 
-	return h.directory + strVirgule + h.method + strVirgule + os.Getenv("WYU_ENV") + strVirgule + fn + "." + h.method
+	strEnv := os.Getenv("WYU_ENV")
+	if strEnv == "" {
+		panic("Error ENV(WYU_ENV) Helper ...")
+	}
+
+	return h.directory + StrVirgule + h.method + StrVirgule + fn + StrDOT + strEnv + StrDOT + h.method
 }
