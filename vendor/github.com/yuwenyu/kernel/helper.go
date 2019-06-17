@@ -1,3 +1,7 @@
+/**
+ * Copyright 2019 YuwenYu.  All rights reserved.
+**/
+
 package kernel
 
 import (
@@ -6,14 +10,14 @@ import (
 )
 
 const (
-	StrCD string = "config"
+	StrCD string = "config" // directory of config (string)
 	StrVirgule string = "/"
 	StrUL string = "_"
 	StrDOT string = "."
 
 	SysTimeFormat string = "2006-01-02 00:00:00"
 	SysDateFormat string = "2006-01-02"
-	DirDateFormat string = "20060102"
+	DirDateFormat string = "20060102" // Directory Time Format
 )
 
 var (
@@ -30,7 +34,6 @@ type Helpers interface {
 }
 
 type Helper struct {
-	k *Kernel
 	directory string
 	method string
 }

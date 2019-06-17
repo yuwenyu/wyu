@@ -1,3 +1,7 @@
+/**
+ * Copyright 2019 YuwenYu.  All rights reserved.
+**/
+
 package kernel
 
 import (
@@ -10,16 +14,72 @@ const strIni string = "ini"
 
 type INI interface {
 	Loading() *ini
+	LoadByFN(fn string) *ini
 	K(section string, key string) *wyuIni.Key
 }
 
 type ini struct {
-	names interface{}
 	directory string
 	cfg *wyuIni.File
 }
 
 var _ INI = &ini{}
+
+func (i *ini) initialize() {
+	if i.directory == "" {
+		i.directory = StrCD
+	}
+}
+
+func (i *ini) Loading() *ini {
+	i.initialize()
+
+	var Helper Helpers = &Helper{directory:i.directory,method:strIni}
+	fns, err := filepath.Glob(Helper.TempCfgEnv("*"))
+	if err != nil {
+		panic(err.Error())
+	}
+
+	if len(fns) == 0 {
+		panic("No files is in the config directory.")
+	}
+
+	arrFns := make([]interface{}, len(fns))
+	for k, fn := range fns {
+		arrFns[k] = fn
+	}
+
+	cfg, err := wyuIni.Load(arrFns[0], arrFns ...)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	i.cfg = cfg
+	return i;
+}
+
+func (i *ini) LoadByFN(fn string) *ini {
+	i.initialize()
+
+	var Helper Helpers = &Helper{directory:i.directory,method:strIni}
+	fns, err := filepath.Glob(Helper.TempCfgEnv(fn))
+	if err != nil {
+		panic(err.Error())
+	}
+
+	arrFns := make([]interface{}, len(fns))
+	for k, fn := range fns {
+		arrFns[k] = fn
+	}
+
+	cfg, err := wyuIni.Load(arrFns[0])
+	if err != nil {
+		panic(err.Error())
+	}
+
+	i.cfg = cfg
+	return i;
+}
 
 /**
  * Todo: Initialize the ic.IniFile in the first place
@@ -54,29 +114,3 @@ func (i *ini) K(section string, key string) *wyuIni.Key {
 //	i.cfg.SaveTo(i.h.TempCfgEnv(i.dir, sIni, fn))
 //	return i
 //}
-
-func (i *ini) Loading() *ini {
-	var Helper Helpers = &Helper{directory:i.directory,method:strIni}
-	fns, err := filepath.Glob(Helper.TempCfgEnv("*"))
-	if err != nil {
-		panic(err.Error())
-	}
-
-	if len(fns) == 0 {
-		panic("No files is in the config directory.")
-	}
-
-	arrFns := make([]interface{}, len(fns))
-	for k, fn := range fns {
-		arrFns[k] = fn
-	}
-
-	cfg, err := wyuIni.Load(arrFns[0], arrFns ...)
-	if err != nil {
-		panic(err.Error())
-	}
-
-	i.cfg = cfg
-
-	return i;
-}

@@ -101,3 +101,8 @@ git reset --hard origin/master
 git pull
 ~~~
 
+## **_Golang xorm CMD_**
+~~~
+go get -u github.com/go-xorm/cmd/xorm
+xorm reverse mysql "username:password@(127.0.0.1:3306)/dbTable?charset=utf8" github.com/go-xorm/cmd/xorm/templates/goxorm
+~~~

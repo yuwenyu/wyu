@@ -7,6 +7,14 @@ github.com/gin-gonic/gin
 github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/json
 github.com/gin-gonic/gin/render
+# github.com/go-sql-driver/mysql v1.4.1
+github.com/go-sql-driver/mysql
+# github.com/go-xorm/builder v0.3.3
+github.com/go-xorm/builder
+# github.com/go-xorm/core v0.6.2
+github.com/go-xorm/core
+# github.com/go-xorm/xorm v0.7.3
+github.com/go-xorm/xorm
 # github.com/golang/protobuf v1.3.1
 github.com/golang/protobuf/proto
 # github.com/json-iterator/go v1.1.6
@@ -19,10 +27,12 @@ github.com/modern-go/concurrent
 github.com/modern-go/reflect2
 # github.com/ugorji/go v1.1.4
 github.com/ugorji/go/codec
-# github.com/yuwenyu/kernel v0.0.0-20190614104009-e045f4d0d3b8 => /Users/wyu/Documents/Technologies/Github/repositories/yuwenyu/kernel
+# github.com/yuwenyu/kernel v0.0.0-20190616134840-daac8b2fa4a1 => /Users/apple/Documents/golang/github/kernel
 github.com/yuwenyu/kernel
-# golang.org/x/sys v0.0.0-20190412213103-97732733099d => github.com/golang/sys v0.0.0-20190502175342-a43fa875dd82
+# golang.org/x/sys v0.0.0-20190502145724-3ef323f4f1fd => github.com/golang/sys v0.0.0-20190502175342-a43fa875dd82
 golang.org/x/sys/unix
+# google.golang.org/appengine v1.4.0 => github.com/golang/appengine v1.5.0
+google.golang.org/appengine/cloudsql
 # gopkg.in/go-playground/validator.v8 v8.18.2
 gopkg.in/go-playground/validator.v8
 # gopkg.in/ini.v1 v1.0.0-00010101000000-000000000000 => github.com/go-ini/ini v1.42.0

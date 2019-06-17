@@ -1,17 +1,21 @@
 package controllers
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"wyu/app/http/services"
 )
 
 type index struct {
 	ctrl *Controller
+	s services.IndexService
 }
 
 func NewIndexController() *index {
 	return &index {
 		ctrl:NewController(),
+		s:services.NewIndexService(),
 	}
 }
 
@@ -33,5 +37,6 @@ func (c *index) Test(gc *gin.Context) {
 		"msg": "test success",
 		"message": http.Dir("my_file_system"),
 		"params": gc.Request.Host,
+		"datasource": c.s.FetchAll(),
 	})
 }

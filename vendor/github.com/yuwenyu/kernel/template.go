@@ -1,3 +1,7 @@
+/**
+ * Copyright 2019 YuwenYu.  All rights reserved.
+**/
+
 package kernel
 
 import (
@@ -24,12 +28,12 @@ func (t *template) Tpl() multitemplate.Renderer {
 
 	tpl := multitemplate.NewRenderer()
 
-	layout, err := filepath.Glob(t.directory + "/" + "layouts/wyu.html")
+	layout, err := filepath.Glob(t.directory + StrVirgule + "layouts/wyu.html")
 	if err != nil {
 		panic(fmt.Sprintf("Template Layout-wyu Error: %s", err.Error()))
 	}
 
-	shareds, err := filepath.Glob(t.directory + "/" + "shared/*.html")
+	shareds, err := filepath.Glob(t.directory + StrVirgule + "shared/*.html")
 	if err != nil {
 		panic(fmt.Sprintf("Template Shared-wyu Error: %s", err.Error()))
 	}

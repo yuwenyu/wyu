@@ -1,7 +1,10 @@
+/**
+ * Copyright 2019 YuwenYu.  All rights reserved.
+**/
+
 package kernel
 
 import (
-	"fmt"
 	"io"
 	"os"
 
@@ -12,20 +15,16 @@ func init() {}
 
 type Kernel struct {
 	Ini *ini
-	T Test
 }
 
 func New() *Kernel {
-	var ini INI = &ini{directory:StrCD + StrVirgule}
+	var ini INI = &ini{}
 	return &Kernel{
 		Ini:ini.Loading(),
-		T: NewTest(),
 	}
 }
 
 func (k *Kernel) Run() *gin.Engine {
-	fmt.Println(k.T.T())
-
 	k.ginInitialize()
 
 	r := gin.Default()
@@ -42,10 +41,10 @@ func (k *Kernel) ginInitialize() {
 
 		cfgLogRoot := k.Ini.K("common_log","log_root").String()
 		if cfgLogRoot == "" {
-			cfgLogRoot = "storage/logs"
+			cfgLogRoot = "storage" + StrVirgule + "logs" + StrVirgule
 		}
 
-		_, err := os.Stat(cfgLogRoot + StrVirgule)
+		_, err := os.Stat(cfgLogRoot)
 		if err != nil {
 			panic(err.Error())
 		}
