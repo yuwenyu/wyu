@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/multitemplate"
 )
 
 func init() {}
@@ -28,10 +29,16 @@ func (k *Kernel) Run() *gin.Engine {
 	k.ginInitialize()
 
 	r := gin.Default()
-	r = k.ginTemplate(r)
-	r = k.ginTemplateStatic(r)
+	r  = k.ginTemplateStatic(r)
 
 	return r
+}
+
+func (k *Kernel) GinTemplate() (multitemplate.Renderer, []string) {
+	var templates templates = &template{
+		directory:k.Ini.K("template_root","directory").String(),
+	}
+	return templates.Tpl(), templates.LoadingTPL()
 }
 
 func (k *Kernel) ginInitialize() {
@@ -60,18 +67,6 @@ func (k *Kernel) ginInitialize() {
 	} else {
 		gin.ForceConsoleColor()
 	}
-}
-
-func (k *Kernel) ginTemplate(r *gin.Engine) *gin.Engine {
-	bTpl, _ := k.Ini.K("common_cfg","template_status").Bool()
-	if bTpl {
-		var templates templates = &template{
-			directory:k.Ini.K("template_root","directory").String(),
-		}
-		r.HTMLRender = templates.Tpl()
-	}
-
-	return r
 }
 
 func (k *Kernel) ginTemplateStatic(r *gin.Engine) *gin.Engine {

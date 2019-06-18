@@ -1,3 +1,7 @@
+/**
+ * Copyright 2019 YuwenYu.  All rights reserved.
+**/
+
 package kernel
 
 import (

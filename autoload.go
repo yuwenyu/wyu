@@ -24,7 +24,19 @@ func new() *autoload {
 
 func (ad *autoload) running() {
 	r := ad.kernel.Run()
-	routes.New(r).HttpRoutes()
+
+	rHttp := routes.New(r)
+	rHttp.HttpRoutes()
+
+	/**
+	 * TODO: Loading Templates
+	 */
+	bTpl, _ := ad.kernel.Ini.K("common_cfg","template_status").Bool()
+	if bTpl {
+		objTPL, arrTPL := ad.kernel.GinTemplate()
+		objTPL.AddFromFilesFuncs("index.html", rHttp.HttpFuncMap(), arrTPL ...)
+		r.HTMLRender = objTPL
+	}
 
 	strPort := ad.kernel.Ini.K("common_server","port").String()
 	if strPort == "" {

@@ -25,6 +25,41 @@ type ini struct {
 
 var _ INI = &ini{}
 
+/**
+ * Todo: Initialize the ic.IniFile in the first place
+ *
+ * Method:Get
+ * var ini INI = &ini{}
+ * ini.Loading()
+ * ini.LoadByFN(filename string)
+ * ini.K(Section, Key).String()
+ * ini.K(Section, Key).In("str", []string{"str", "str2"})
+ * ini.K(Section, Key).MustInt(9999)
+ * ini.K(Section, Key).MustBool(false)
+**/
+
+func (i *ini) K(section string, key string) *wyuIni.Key {
+	if i.cfg == nil {
+		panic("Error nil")
+	}
+
+	return i.cfg.Section(section).Key(key)
+}
+
+/**
+ * Method:Set
+ * ini.K(Section, Key).SetValue(value string).SaveTo(Path)
+*/
+//func (i *ini) SaveTo(fn string) *ini {
+//	if i.cfg == nil {
+//		panic("Error nil")
+//	}
+//
+//	var Helper Helpers = &Helper{directory:i.directory,method:strIni}
+//	i.cfg.SaveTo(Helper.TempCfgEnv(fn))
+//	return i
+//}
+
 func (i *ini) initialize() {
 	if i.directory == "" {
 		i.directory = StrCD
@@ -80,37 +115,3 @@ func (i *ini) LoadByFN(fn string) *ini {
 	i.cfg = cfg
 	return i;
 }
-
-/**
- * Todo: Initialize the ic.IniFile in the first place
- *
- * Method:Get
- * kernel.Ic.Loading()
- * kernel.Ic.K("Key")
- * kernel.Ic.K("Key").In("str", []string{"str1","str2"})
- * kernel.Ic.K("Key").MustInt(9999)
- * kernel.Ic.K("Key").MustBool(false)
- *
- * Method:Set
- * kernel.Ic.K("Key").SetValue("SetValue")
- * i.cfg.SaveTo(Path)
- * cfg.Section("").Key("app_mode").SetValue("production")
- * cfg.SaveTo(path+"my.ini.local")
- */
-func (i *ini) K(section string, key string) *wyuIni.Key {
-	if i.cfg == nil {
-		panic("Error nil")
-	}
-
-	return i.cfg.Section(section).Key(key)
-}
-
-//func (i *Ic) SaveTo(key string, val string, fn string) *Ic {
-//	if i.cfg == nil {
-//		panic("Error nil")
-//	}
-//
-//	i.K(key).SetValue(val)
-//	i.cfg.SaveTo(i.h.TempCfgEnv(i.dir, sIni, fn))
-//	return i
-//}

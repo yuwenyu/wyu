@@ -19,12 +19,12 @@ func NewIndexController() *index {
 	}
 }
 
-func (c *index) before() gin.HandlerFunc {
-	return func(gc *gin.Context) {
-		gc.Next()
-		return
-	}
-}
+//func (c *index) before() gin.HandlerFunc {
+//	return func(gc *gin.Context) {
+//		gc.Next()
+//		return
+//	}
+//}
 
 func (c *index) Ping(gc *gin.Context) {
 	gc.HTML(http.StatusOK, "index.html", gin.H{

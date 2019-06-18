@@ -13,6 +13,7 @@ import (
 
 type templates interface {
 	Tpl() multitemplate.Renderer
+	LoadingTPL() []string
 }
 
 type template struct {
@@ -22,11 +23,13 @@ type template struct {
 var _ templates = &template{}
 
 func (t *template) Tpl() multitemplate.Renderer {
+	return multitemplate.NewRenderer()
+}
+
+func (t *template) LoadingTPL() []string {
 	if t.directory == "" {
 		panic("Error: Empty Template Dir")
 	}
-
-	tpl := multitemplate.NewRenderer()
 
 	layout, err := filepath.Glob(t.directory + StrVirgule + "layouts/wyu.html")
 	if err != nil {
@@ -45,9 +48,7 @@ func (t *template) Tpl() multitemplate.Renderer {
 		arrTPL = append(arrTPL, shared)
 	}
 
-	tpl.AddFromFiles("index.html", arrTPL ...)
-
-	return tpl
+	return arrTPL
 }
 
 

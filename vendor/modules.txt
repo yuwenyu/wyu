@@ -25,6 +25,8 @@ github.com/mattn/go-isatty
 github.com/modern-go/concurrent
 # github.com/modern-go/reflect2 v1.0.1
 github.com/modern-go/reflect2
+# github.com/syyongx/ii18n v0.0.0-20190531015407-03d063505fc9
+github.com/syyongx/ii18n
 # github.com/ugorji/go v1.1.4
 github.com/ugorji/go/codec
 # github.com/yuwenyu/kernel v0.0.0-20190616134840-daac8b2fa4a1 => /Users/apple/Documents/golang/github/kernel
