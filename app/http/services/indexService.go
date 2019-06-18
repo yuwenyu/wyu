@@ -18,7 +18,7 @@ var _ IndexService = &indexService{}
 
 func NewIndexService() *indexService {
 	return &indexService{
-		mConfigs:models.NewConfigsModel(kernel.InstanceMaster()),
+		mConfigs:models.NewConfigsModel(kernel.InstanceMaster(0)),
 	}
 }
 

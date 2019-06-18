@@ -7,6 +7,7 @@ package kernel
 import (
 	"fmt"
 	"log"
+	"strconv"
 	"sync"
 
 	"github.com/go-xorm/xorm"
@@ -15,11 +16,35 @@ import (
 
 var (
 	masterEngine *xorm.Engine
-	slaverEngine *xorm.Engine
 	mx		 	  sync.Mutex
 )
 
-func InstanceMaster() *xorm.Engine {
+type dataSource struct {
+	dn string
+	host string
+	port int
+	table string
+	username string
+	password string
+}
+
+func initDataSource(intSrc int) dataSource {
+	var src string = strconv.Itoa(intSrc)
+	var c INI = &ini{}
+	c.LoadByFN("db")
+	port, _ := c.K("db_engine_" + src, "port").Int()
+
+	return dataSource{
+		dn:c.K("db_engine_" + src, "driver").String(),
+		host:c.K("db_engine_" + src, "host").String(),
+		port:port,
+		table:c.K("db_engine_" + src, "table").String(),
+		username:c.K("db_engine_" + src, "username").String(),
+		password:c.K("db_engine_" + src, "password").String(),
+	}
+}
+
+func InstanceMaster(src int) *xorm.Engine {
 	if masterEngine != nil {
 		return masterEngine
 	}
@@ -31,18 +56,14 @@ func InstanceMaster() *xorm.Engine {
 		return masterEngine
 	}
 
-	var c INI = &ini{}
-	c.LoadByFN("db")
+	if src <= 0 {
+		src = 1
+	}
 
-	host := c.K("db_master","host").String()
-	port, _ := c.K("db_master","port").Int()
-	table:= c.K("db_master","table").String()
-	username := c.K("db_master","username").String()
-	password := c.K("db_master","password").String()
-
+	ds := initDataSource(src)
 	driverSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
-		username, password, host, port, table)
-	engine, err := xorm.NewEngine("mysql", driverSource)
+		ds.username, ds.password, ds.host, ds.port, ds.table)
+	engine, err := xorm.NewEngine(ds.dn, driverSource)
 
 	if err != nil {
 		log.Fatalf("db.DbInstanceMaster,", err)
@@ -57,41 +78,6 @@ func InstanceMaster() *xorm.Engine {
 	// engine.SetDefaultCacher(cacher)
 
 	masterEngine = engine
-
-	return engine
-}
-
-func InstanceSlaver() *xorm.Engine {
-	if slaverEngine != nil {
-		return slaverEngine
-	}
-
-	mx.Lock()
-	defer mx.Unlock()
-
-	if slaverEngine != nil {
-		return slaverEngine
-	}
-
-	var c INI = &ini{}
-	c.LoadByFN("db")
-
-	host := c.K("db_slaver","host").String()
-	port, _ := c.K("db_slaver","port").Int()
-	table:= c.K("db_slaver","table").String()
-	username := c.K("db_slaver","username").String()
-	password := c.K("db_slaver","password").String()
-
-	driverSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
-		username, password, host, port, table)
-	engine, err := xorm.NewEngine("mysql", driverSource)
-
-	if err != nil {
-		log.Fatalf("db.DbInstanceSlaver", err)
-	}
-
-	engine.SetTZLocation(SysTimeLocation)
-	slaverEngine = engine
 
 	return engine
 }
