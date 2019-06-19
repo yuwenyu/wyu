@@ -34,11 +34,18 @@ func (k *Kernel) Run() *gin.Engine {
 	return r
 }
 
-func (k *Kernel) GinTemplate() (multitemplate.Renderer, []string) {
+func (k *Kernel) GinTemplate() multitemplate.Renderer {
 	var templates templates = &template{
 		directory:k.Ini.K("template_root","directory").String(),
 	}
-	return templates.Tpl(), templates.LoadingTPL()
+	return templates.Tpl()
+}
+
+func (k *Kernel) GinTemplateLoadByView(view string) []string {
+	var templates templates = &template{
+		directory:k.Ini.K("template_root","directory").String(),
+	}
+	return templates.LoadingTPL(view)
 }
 
 func (k *Kernel) ginInitialize() {

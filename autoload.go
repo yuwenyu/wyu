@@ -25,17 +25,26 @@ func new() *autoload {
 func (ad *autoload) running() {
 	r := ad.kernel.Run()
 
-	rHttp := routes.New(r)
-	rHttp.HttpRoutes()
-
 	/**
 	 * TODO: Loading Templates
 	 */
 	bTpl, _ := ad.kernel.Ini.K("common_cfg","template_status").Bool()
 	if bTpl {
-		objTPL, arrTPL := ad.kernel.GinTemplate()
-		objTPL.AddFromFilesFuncs("index.html", rHttp.HttpFuncMap(), arrTPL ...)
+		rHttp := routes.New(r)
+		rHttp.HttpRoutes()
+
+		objTPL := ad.kernel.GinTemplate()
+		arrIndexTPL := ad.kernel.GinTemplateLoadByView("index")
+		objTPL.AddFromFilesFuncs("index.html",rHttp.HttpFuncMap(), arrIndexTPL ...)
+		arrTest1TPL := ad.kernel.GinTemplateLoadByView("test1")
+		objTPL.AddFromFilesFuncs("test1.html",rHttp.HttpFuncMap(), arrTest1TPL ...)
 		r.HTMLRender = objTPL
+
+		//objTPL, arrTPL := ad.kernel.GinTemplate("index")
+		//objTPL.AddFromFilesFuncs("index.html", rHttp.HttpFuncMap(), arrTPL ...)
+		//objTPL, arrTPL := ad.kernel.GinTemplate("test1")
+		//objTPL.AddFromFilesFuncs("test1.html", rHttp.HttpFuncMap(), arrTPL ...)
+		//r.HTMLRender = objTPL
 	}
 
 	strPort := ad.kernel.Ini.K("common_server","port").String()

@@ -13,7 +13,7 @@ import (
 
 type templates interface {
 	Tpl() multitemplate.Renderer
-	LoadingTPL() []string
+	LoadingTPL(view string) []string
 }
 
 type template struct {
@@ -26,7 +26,7 @@ func (t *template) Tpl() multitemplate.Renderer {
 	return multitemplate.NewRenderer()
 }
 
-func (t *template) LoadingTPL() []string {
+func (t *template) LoadingTPL(view string) []string {
 	if t.directory == "" {
 		panic("Error: Empty Template Dir")
 	}
@@ -42,13 +42,12 @@ func (t *template) LoadingTPL() []string {
 	}
 
 	arrTPL := make([]string, 1)
-	arrTPL  = append(layout, t.directory + "/views/index.html")
+	arrTPL  = append(layout, t.directory + "/views/"+view+".html")
+	//arrTPL  = append(layout, t.directory + "/views/test1.html")
 
 	for _, shared := range shareds {
 		arrTPL = append(arrTPL, shared)
 	}
-
+	fmt.Println(arrTPL)
 	return arrTPL
 }
-
-
