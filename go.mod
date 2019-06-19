@@ -64,5 +64,5 @@ replace (
 require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-xorm/xorm v0.7.3
-	github.com/yuwenyu/kernel v0.0.0-20190618090509-1e6403aabed3
+	github.com/yuwenyu/kernel v0.0.0-20190618144949-a585e69fbe88
 )
