@@ -13,7 +13,7 @@ import (
 
 type templates interface {
 	Tpl() multitemplate.Renderer
-	LoadingTPL(view string) []string
+	LoadingTPL(skeleton string, view string) []string
 }
 
 type template struct {
@@ -26,28 +26,27 @@ func (t *template) Tpl() multitemplate.Renderer {
 	return multitemplate.NewRenderer()
 }
 
-func (t *template) LoadingTPL(view string) []string {
+func (t *template) LoadingTPL(skeleton string, view string) []string {
 	if t.directory == "" {
 		panic("Error: Empty Template Dir")
 	}
 
-	layout, err := filepath.Glob(t.directory + StrVirgule + "layouts/wyu.html")
+	layout, err := filepath.Glob(t.directory + StrVirgule + "layouts" + StrVirgule + skeleton + ".html")
 	if err != nil {
 		panic(fmt.Sprintf("Template Layout-wyu Error: %s", err.Error()))
 	}
 
-	shareds, err := filepath.Glob(t.directory + StrVirgule + "shared/*.html")
+	shareds, err := filepath.Glob(t.directory + StrVirgule + "shared" + StrVirgule + skeleton + StrVirgule + "*.html")
 	if err != nil {
 		panic(fmt.Sprintf("Template Shared-wyu Error: %s", err.Error()))
 	}
 
 	arrTPL := make([]string, 1)
-	arrTPL  = append(layout, t.directory + "/views/"+view+".html")
-	//arrTPL  = append(layout, t.directory + "/views/test1.html")
+	arrTPL  = append(layout, t.directory + StrVirgule + "views" + StrVirgule + skeleton + StrVirgule + view + ".html")
 
 	for _, shared := range shareds {
 		arrTPL = append(arrTPL, shared)
 	}
-	fmt.Println(arrTPL)
+
 	return arrTPL
 }

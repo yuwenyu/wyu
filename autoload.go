@@ -4,6 +4,8 @@
 package wyu
 
 import (
+	"strings"
+
 	"github.com/yuwenyu/kernel"
 	"wyu/routes"
 )
@@ -33,18 +35,21 @@ func (ad *autoload) running() {
 		rHttp := routes.New(r)
 		rHttp.HttpRoutes()
 
-		objTPL := ad.kernel.GinTemplate()
-		arrIndexTPL := ad.kernel.GinTemplateLoadByView("index")
-		objTPL.AddFromFilesFuncs("index.html",rHttp.HttpFuncMap(), arrIndexTPL ...)
-		arrTest1TPL := ad.kernel.GinTemplateLoadByView("test1")
-		objTPL.AddFromFilesFuncs("test1.html",rHttp.HttpFuncMap(), arrTest1TPL ...)
-		r.HTMLRender = objTPL
+		strResources := ad.kernel.Ini.K("template_root","resources").String()
+		arrResources := strings.Split(strResources, "|")
+		if arrResources == nil {
+			panic("Templates Resources nil, Please check the configure!")
+		}
 
-		//objTPL, arrTPL := ad.kernel.GinTemplate("index")
-		//objTPL.AddFromFilesFuncs("index.html", rHttp.HttpFuncMap(), arrTPL ...)
-		//objTPL, arrTPL := ad.kernel.GinTemplate("test1")
-		//objTPL.AddFromFilesFuncs("test1.html", rHttp.HttpFuncMap(), arrTPL ...)
-		//r.HTMLRender = objTPL
+		objTPL := ad.kernel.GinTemplate()
+		for _, vResources := range arrResources {
+			arrViews := strings.Split(vResources, ":")
+			for _, view := range strings.Split(arrViews[1], ",") {
+				arrTPL := ad.kernel.GinTemplateLoadByView(arrViews[0], view)
+				objTPL.AddFromFilesFuncs(view, rHttp.HttpFuncMap(), arrTPL ...)
+			}
+		}
+		r.HTMLRender = objTPL
 	}
 
 	strPort := ad.kernel.Ini.K("common_server","port").String()

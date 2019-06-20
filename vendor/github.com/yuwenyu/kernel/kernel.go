@@ -41,11 +41,11 @@ func (k *Kernel) GinTemplate() multitemplate.Renderer {
 	return templates.Tpl()
 }
 
-func (k *Kernel) GinTemplateLoadByView(view string) []string {
+func (k *Kernel) GinTemplateLoadByView(skeleton string, view string) []string {
 	var templates templates = &template{
 		directory:k.Ini.K("template_root","directory").String(),
 	}
-	return templates.LoadingTPL(view)
+	return templates.LoadingTPL(skeleton, view)
 }
 
 func (k *Kernel) ginInitialize() {

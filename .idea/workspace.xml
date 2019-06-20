@@ -5,10 +5,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/http/controllers/IndexController.go" beforeDir="false" afterPath="$PROJECT_DIR$/app/http/controllers/IndexController.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/autoload.go" beforeDir="false" afterPath="$PROJECT_DIR$/autoload.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/ini/db.dev.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/ini/db.dev.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/ini/templates.dev.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/ini/templates.dev.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/templates/layouts/wyu.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/layouts/wyu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/templates/views/test1.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/views/test1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/layouts/wyu_test.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/layouts/ttt.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/shared/banner.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/shared/wyu/banner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/shared/bottom.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/shared/wyu/bottom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/shared/top.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/shared/wyu/top.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/views/wyu/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/templates/views/test1.html" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/views/wyu/test1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/gin-contrib/multitemplate/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/gin-contrib/multitemplate/.travis.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/gin-contrib/multitemplate/LICENSE" beforeDir="false" />
@@ -334,10 +339,10 @@
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/go_below_17.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/go_below_19.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/reflect2.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/reflect2_amd64.s" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/reflect2_amd64.s" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/shared/ttt/s1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/reflect2_kind.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_386.s" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_amd64p32.s" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_386.s" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/views/ttt/t1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_amd64p32.s" beforeDir="false" afterPath="$PROJECT_DIR$/resources/templates/views/ttt/t2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_arm.s" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_arm64.s" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/github.com/modern-go/reflect2/relfect2_mips64x.s" beforeDir="false" />
@@ -760,11 +765,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/autoload.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="338">
+              <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
               <folding>
                 <element signature="e#113#166#0" expanded="true" />
               </folding>
@@ -772,11 +777,41 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/views/test1.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/go.mod">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" selection-start-column="17" selection-end-column="17" />
+            <state relative-caret-position="171">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/http/services/indexService.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="20" column="39" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="39" />
+              <folding>
+                <element signature="e#18#103#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/ini/db.dev.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/ini/commons.dev.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -784,8 +819,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/http.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
+            <state relative-caret-position="361">
+              <caret line="19" column="54" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="54" />
               <folding>
                 <element signature="e#16#129#0" expanded="true" />
               </folding>
@@ -794,46 +829,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/layouts/wyu.html">
+        <entry file="file://$PROJECT_DIR$/config/ini/templates.dev.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/go.mod">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/ini/db.dev.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/http/services/indexService.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/templates/views/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="133">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -841,8 +840,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/http/controllers/IndexController.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
+            <state relative-caret-position="509">
+              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
               <folding>
                 <element signature="e#21#97#0" expanded="true" />
               </folding>
@@ -900,19 +899,20 @@
         <option value="$PROJECT_DIR$/routes/http.go" />
         <option value="$PROJECT_DIR$/resources/templates/views/index.html" />
         <option value="$PROJECT_DIR$/app/http/services/indexService.go" />
-        <option value="$PROJECT_DIR$/config/ini/db.dev.ini" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/app/main.go" />
-        <option value="$PROJECT_DIR$/go.mod" />
         <option value="$PROJECT_DIR$/resources/templates/layouts/wyu.html" />
         <option value="$PROJECT_DIR$/resources/templates/views/test1.html" />
+        <option value="$PROJECT_DIR$/config/ini/db.dev.ini" />
         <option value="$PROJECT_DIR$/app/http/controllers/IndexController.go" />
         <option value="$PROJECT_DIR$/autoload.go" />
+        <option value="$PROJECT_DIR$/config/ini/templates.dev.ini" />
+        <option value="$PROJECT_DIR$/go.mod" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="67" />
+    <option name="x" value="66" />
     <option name="y" value="23" />
     <option name="width" value="1213" />
     <option name="height" value="777" />
@@ -936,6 +936,32 @@
               <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
               <item name="wyu" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
@@ -977,42 +1003,14 @@
               <item name="wyu" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wyu" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wyu" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wyu" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wyu" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wyu" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="yuwenyu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wyu" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
-              <item name="yuwenyu" type="462c0819:PsiDirectoryNode" />
-              <item name="kernel" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wyu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -1036,15 +1034,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.HTML" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/config/ini" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/templates/views/wyu" />
+      <recent name="$PROJECT_DIR$/resources/templates/shared/wyu" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/app/http" />
       <recent name="$PROJECT_DIR$/config/dev" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/config/ini" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -1060,15 +1058,15 @@
     </option>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24606581" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32771084" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32739726" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1084,12 +1082,12 @@
       <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16453674" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32771084" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32739726" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1112,38 +1110,21 @@
     <integration-enabled>true</integration-enabled>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/go/src/html/template/examplefiles_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1166" />
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/go/src/html/template/example_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1538" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/layouts/wyu_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="40" lean-forward="true" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/shared/top.html">
+    <entry file="file://$PROJECT_DIR$/resources/templates/shared/wyu/top.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/shared/bottom.html">
+    <entry file="file://$PROJECT_DIR$/resources/templates/shared/wyu/bottom.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/shared/banner.html">
+    <entry file="file://$PROJECT_DIR$/resources/templates/shared/wyu/banner.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="1" selection-start-column="1" selection-end-column="1" />
@@ -1243,13 +1224,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/repositories/models/sys_config.go" />
-    <entry file="file://$PROJECT_DIR$/config/ini/templates.dev.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/middleware/translate.go" />
     <entry file="file://$USER_HOME$/go/pkg/mod/github.com/gin-contrib/multitemplate@v0.0.0-20190528082104-30e424939505/renderer.go">
       <provider selected="true" editor-type-id="text-editor">
@@ -1335,20 +1309,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/ini/db.dev.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/ini/commons.dev.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -1359,14 +1319,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/go.mod">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="62" column="1" selection-start-line="62" selection-start-column="1" selection-end-line="62" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/views/index.html">
+    <entry file="file://$PROJECT_DIR$/resources/templates/views/wyu/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
@@ -1390,37 +1343,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/templates/views/test1.html">
+    <entry file="file://$PROJECT_DIR$/resources/templates/views/wyu/test1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="17" selection-start-column="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/http.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="62" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
-          <folding>
-            <element signature="e#16#129#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/http/services/indexService.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="20" column="63" selection-start-line="20" selection-start-column="63" selection-end-line="20" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/http/controllers/IndexController.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="36" column="27" selection-start-line="36" selection-start-column="27" selection-end-line="36" selection-end-column="27" />
-          <folding>
-            <element signature="e#21#97#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1431,13 +1357,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/views/ttt/t2.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/shared/ttt/s1.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/templates/views/ttt/t1.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/http.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="54" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="54" />
+          <folding>
+            <element signature="e#16#129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/ini/commons.dev.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/ini/db.dev.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/http/services/indexService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="39" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="39" />
+          <folding>
+            <element signature="e#18#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/http/controllers/IndexController.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="509">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+          <folding>
+            <element signature="e#21#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/ini/templates.dev.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/autoload.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+        <state relative-caret-position="338">
+          <caret line="51" column="29" selection-start-line="51" selection-start-column="29" selection-end-line="51" selection-end-column="29" />
           <folding>
             <element signature="e#113#166#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.mod">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
