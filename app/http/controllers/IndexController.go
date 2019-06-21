@@ -27,13 +27,13 @@ func NewIndexController() *index {
 //}
 
 func (c *index) Ping(gc *gin.Context) {
-	gc.HTML(http.StatusOK, "index", gin.H{
+	gc.HTML(http.StatusOK, "index.html", gin.H{
 		"title" : "test",
 	})
 }
 
 func (c *index) Test(gc *gin.Context) {
-	gc.HTML(http.StatusOK, "test1", gin.H{
+	gc.HTML(http.StatusOK, "test1.html", gin.H{
 		"title" : "test one",
 	})
 

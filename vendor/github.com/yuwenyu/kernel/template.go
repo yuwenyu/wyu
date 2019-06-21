@@ -42,7 +42,7 @@ func (t *template) LoadingTPL(skeleton string, view string) []string {
 	}
 
 	arrTPL := make([]string, 1)
-	arrTPL  = append(layout, t.directory + StrVirgule + "views" + StrVirgule + skeleton + StrVirgule + view + ".html")
+	arrTPL  = append(layout, t.directory + StrVirgule + "views" + StrVirgule + skeleton + StrVirgule + view)
 
 	for _, shared := range shareds {
 		arrTPL = append(arrTPL, shared)

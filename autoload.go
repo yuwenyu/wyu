@@ -4,10 +4,15 @@
 package wyu
 
 import (
+	"io/ioutil"
 	"strings"
 
 	"github.com/yuwenyu/kernel"
 	"wyu/routes"
+)
+
+const (
+	directoryView string = "resources/templates/views/"
 )
 
 func init() {
@@ -36,17 +41,22 @@ func (ad *autoload) running() {
 		rHttp.HttpRoutes()
 
 		strResources := ad.kernel.Ini.K("template_root","resources").String()
-		arrResources := strings.Split(strResources, "|")
-		if arrResources == nil {
+		if strResources == "" {
 			panic("Templates Resources nil, Please check the configure!")
 		}
 
+		strDirectoryViews := ad.kernel.Ini.K("template_root","directory_views").String()
+		if strDirectoryViews == "" {
+			strDirectoryViews = directoryView
+		}
+
+		arrResources := strings.Split(strResources, ":")
 		objTPL := ad.kernel.GinTemplate()
-		for _, vResources := range arrResources {
-			arrViews := strings.Split(vResources, ":")
-			for _, view := range strings.Split(arrViews[1], ",") {
-				arrTPL := ad.kernel.GinTemplateLoadByView(arrViews[0], view)
-				objTPL.AddFromFilesFuncs(view, rHttp.HttpFuncMap(), arrTPL ...)
+		for _, skeleton := range arrResources {
+			views, _ := ioutil.ReadDir(strDirectoryViews + skeleton)
+			for _, view := range views {
+				arrTPL := ad.kernel.GinTemplateLoadByView(skeleton, view.Name())
+				objTPL.AddFromFilesFuncs(view.Name(), rHttp.HttpFuncMap(), arrTPL ...)
 			}
 		}
 		r.HTMLRender = objTPL
