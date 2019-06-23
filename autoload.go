@@ -13,6 +13,7 @@ import (
 
 const (
 	directoryView string = "resources/templates/views/"
+	ginPort string = "8080"
 )
 
 func init() {
@@ -64,10 +65,8 @@ func (ad *autoload) running() {
 
 	strPort := ad.kernel.Ini.K("common_server","port").String()
 	if strPort == "" {
-		r.Run(":8080")
+		r.Run(kernel.StrColon + ginPort)
 	} else {
-		r.Run(strPort)
+		r.Run(kernel.StrColon + strPort)
 	}
 }
-
-

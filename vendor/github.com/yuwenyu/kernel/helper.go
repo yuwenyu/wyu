@@ -14,6 +14,7 @@ const (
 	StrVirgule string = "/"
 	StrUL string = "_"
 	StrDOT string = "."
+	StrColon string = ":"
 
 	SysTimeFormat string = "2006-01-02 00:00:00"
 	SysDateFormat string = "2006-01-02"
