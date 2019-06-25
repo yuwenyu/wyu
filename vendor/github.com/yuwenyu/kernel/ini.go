@@ -38,6 +38,10 @@ var _ INI = &ini{}
  * ini.K(Section, Key).MustBool(false)
 **/
 
+func NewIni() *ini {
+	return &ini{}
+}
+
 func (i *ini) K(section string, key string) *wyuIni.Key {
 	if i.cfg == nil {
 		panic("Error nil")

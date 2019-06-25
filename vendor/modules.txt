@@ -7,6 +7,14 @@ github.com/gin-gonic/gin
 github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/internal/json
 github.com/gin-gonic/gin/render
+# github.com/go-redis/redis v6.15.2+incompatible
+github.com/go-redis/redis
+github.com/go-redis/redis/internal
+github.com/go-redis/redis/internal/consistenthash
+github.com/go-redis/redis/internal/hashtag
+github.com/go-redis/redis/internal/pool
+github.com/go-redis/redis/internal/proto
+github.com/go-redis/redis/internal/util
 # github.com/go-sql-driver/mysql v1.4.1
 github.com/go-sql-driver/mysql
 # github.com/go-xorm/builder v0.3.3
@@ -29,7 +37,7 @@ github.com/modern-go/reflect2
 github.com/syyongx/ii18n
 # github.com/ugorji/go v1.1.4
 github.com/ugorji/go/codec
-# github.com/yuwenyu/kernel v0.0.0-20190621072930-e86ea3ad4694 => /Users/wyu/Documents/Technologies/Github/repositories/yuwenyu/kernel
+# github.com/yuwenyu/kernel v0.0.0-20190623115045-95cab48d5b52 => /Users/apple/Documents/golang/github/kernel
 github.com/yuwenyu/kernel
 # golang.org/x/sys v0.0.0-20190502145724-3ef323f4f1fd => github.com/golang/sys v0.0.0-20190502175342-a43fa875dd82
 golang.org/x/sys/unix

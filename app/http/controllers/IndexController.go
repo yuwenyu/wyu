@@ -19,28 +19,23 @@ func NewIndexController() *index {
 	}
 }
 
-//func (c *index) before() gin.HandlerFunc {
-//	return func(gc *gin.Context) {
-//		gc.Next()
-//		return
-//	}
-//}
-
 func (c *index) Ping(gc *gin.Context) {
 	gc.HTML(http.StatusOK, "index.html", gin.H{
 		"title" : "test",
+		//"redis" : c.s.GetRedis(),
 	})
 }
 
 func (c *index) Test(gc *gin.Context) {
-	gc.HTML(http.StatusOK, "test1.html", gin.H{
-		"title" : "test one",
-	})
-
-	//gc.JSON(http.StatusOK, gin.H{
-	//	"msg": "test success",
-	//	"message": http.Dir("my_file_system"),
-	//	"params": gc.Request.Host,
-	//	"datasource": c.s.FetchAll(),
+	//gc.HTML(http.StatusOK, "test1.html", gin.H{
+	//	"title" : "test one",
 	//})
+
+	gc.JSON(http.StatusOK, gin.H{
+		"msg": "test success",
+		"message": http.Dir("my_file_system"),
+		"params": gc.Request.Host,
+		"datasource": c.s.FetchAll(),
+		"redis": c.s.GetRedis(),
+	})
 }
