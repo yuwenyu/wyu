@@ -14,6 +14,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+var dbEngines map[int]db
+
 type DB interface {
 	Engine() *xorm.Engine
 	Test() int
@@ -32,32 +34,39 @@ func NewDB(src int) *db {
 		src = 1
 	}
 
-	return &db{id:src}
-}
-
-func (db *db) Engine() *xorm.Engine {
-	if db.engine == nil {
-		db.instanceMaster()
-		fmt.Println("--- Initialized Engine DB Source New Initialized! ---")
+	var odb *db
+	if v, ok := dbEngines[src]; ok {
+		odb = &v
+		fmt.Println("initialized global")
+	} else {
+		odb = &db{id:src}
+		fmt.Println("initialized New")
 	}
 
-	return db.engine
+	return odb
 }
 
-func (db *db) Test() int {
-	return db.id
-}
-
-func (db *db) instanceMaster() *db {
-	db.mx.Lock()
-	defer db.mx.Unlock()
-
-	if db.engine != nil {
-		fmt.Println("--- Initialized Engine DB Source New Exist ---")
-		return db
+func (tdb *db) Engine() *xorm.Engine {
+	if tdb.engine == nil {
+		tdb.instanceMaster()
 	}
 
-	ds := db.initialized()
+	return tdb.engine
+}
+
+func (tdb *db) Test() int {
+	return tdb.id
+}
+
+func (tdb *db) instanceMaster() *db {
+	tdb.mx.Lock()
+	defer tdb.mx.Unlock()
+
+	if tdb.engine != nil {
+		return tdb
+	}
+
+	ds := tdb.initialized()
 	driverSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
 		ds.username, ds.password, ds.host, ds.port, ds.table)
 	engine, err := xorm.NewEngine(ds.dn, driverSource)
@@ -74,10 +83,12 @@ func (db *db) instanceMaster() *db {
 	// cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(),1000)
 	// engine.SetDefaultCacher(cacher)
 
-	fmt.Println("--- Initialized Engine DB Source New ---")
-	db.engine = engine
+	tdb.engine = engine
 
-	return db
+	dbEngines := make(map[int]db)
+	dbEngines[tdb.id] = *tdb
+
+	return tdb
 }
 
 type dataSource struct {
@@ -89,8 +100,8 @@ type dataSource struct {
 	password string
 }
 
-func (db *db) initialized() dataSource {
-	var src string = strconv.Itoa(db.id)
+func (tdb *db) initialized() dataSource {
+	var src string = strconv.Itoa(tdb.id)
 	var c INI = &ini{}
 	c.LoadByFN("db")
 	port, _ := c.K("db_engine_" + src, "port").Int()
