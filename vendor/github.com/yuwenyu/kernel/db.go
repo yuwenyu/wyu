@@ -31,14 +31,14 @@ var _ DB = &db{}
 func NewDB(src int) *db {
 	if src <= 0 { src = 1 }
 
-	var odb *db
+	var object *db
 	if v, ok := dbEngines[src]; ok {
-		odb = &v
+		object = &v
 	} else {
-		odb = &db{id:src}
+		object = &db{id:src}
 	}
 
-	return odb
+	return object
 }
 
 func (odbc *db) Engine() *xorm.Engine {
@@ -79,12 +79,15 @@ func (odbc *db) instanceMaster() *db {
 		return nil
 	}
 
+	engine.SetMaxOpenConns(20)
+	engine.SetMaxIdleConns(20)
+
 	engine.ShowSQL(false)
 	engine.SetTZDatabase(SysTimeLocation)
 
-	// SQL Cache
-	// cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(),1000)
-	// engine.SetDefaultCacher(cacher)
+	//SQL Cache
+	//cached := xorm.NewLRUCacher(xorm.NewMemoryStore(),1000)
+	//engine.SetDefaultCacher(cached)
 
 	odbc.engine = engine
 
@@ -100,6 +103,8 @@ type dataSource struct {
 	table 	 string
 	username string
 	password string
+	maxOpen	 int
+	maxIdle	 int
 }
 
 func (odbc *db) initDataSource() *dataSource {
@@ -112,6 +117,8 @@ func (odbc *db) initDataSource() *dataSource {
 	table 	:= c.K(key, "table").String()
 	username:= c.K(key, "username").String()
 	password:= c.K(key, "password").String()
+	max_open, _ := c.K(key, "max_open").Int()
+	max_idle, _ := c.K(key, "max_idle").Int()
 
 	return &dataSource{
 		dn:			dn,
@@ -120,5 +127,7 @@ func (odbc *db) initDataSource() *dataSource {
 		table:		table,
 		username:	username,
 		password:	password,
+		maxOpen:	max_open,
+		maxIdle:	max_idle,
 	}
 }

@@ -2,17 +2,20 @@ package kernel
 
 import (
 	"fmt"
-	"github.com/go-redis/redis"
 	"sync"
+
+	"github.com/go-redis/redis"
 )
 
 var (
-	krc *redis.Client
-	mxr	 sync.Mutex
+	cacheKr *redis.Client
+	redisMX	 sync.Mutex
 )
 
 type Kr interface {
 	Get(key string) string
+	Start() *r
+	Engine() *redis.Client
 	Close()
 }
 
@@ -22,44 +25,60 @@ type r struct {
 
 var _ Kr = &r{}
 
-type redisOptions struct {
-	Addr 		string
-	Password 	string
-	DB 			int
-	PoolSize	int
-}
-
-func initialized() *redisOptions {
-	return &redisOptions{
-		Addr:		"127.0.0.1:6379",
-		Password:	"",
-		DB:			0,
-		PoolSize:	10,
-	}
-}
-
 func NewRedis() *r {
-	if krc == nil {
-		ros := initialized()
-		krc  = redis.NewClient(&redis.Options{
-			Addr:     ros.Addr,
-			Password: ros.Password,
-			DB:       ros.DB,
-			PoolSize: ros.PoolSize,
-		})
-
-		fmt.Println("--- Initialized Engine Redis ---")
+	var object *r = &r{}
+	if cacheKr != nil {
+		object.kr = cacheKr
 	}
 
-	_, err := krc.Ping().Result()
+	return object
+}
+
+func (thisKr *r) Start() *r {
+	if thisKr.kr == nil {
+		thisKr.instanceMaster()
+	}
+
+	return thisKr
+}
+
+func (thisKr *r) Engine() *redis.Client {
+	if thisKr.kr == nil {
+		thisKr.instanceMaster()
+	}
+
+	return thisKr.kr
+}
+
+func (thisKr *r) instanceMaster() *r {
+	redisMX.Lock()
+	defer redisMX.Unlock()
+
+	if cacheKr != nil {
+		thisKr.kr = cacheKr
+		return thisKr
+	}
+
+	ros := thisKr.initialized()
+	clientKr := redis.NewClient(&redis.Options{
+		Addr:     ros.Addr,
+		Password: ros.Password,
+		DB:       ros.DB,
+		PoolSize: ros.PoolSize,
+	})
+
+	_, err := clientKr.Ping().Result()
 	if err != nil {
 		panic(fmt.Sprintf("ping error[%s]\n", err.Error()))
 	}
 
-	mxr.Lock()
-	defer mxr.Unlock()
+	if cacheKr == nil {
+		cacheKr = clientKr
+	}
 
-	return &r{kr:krc}
+	thisKr.kr = clientKr
+
+	return thisKr
 }
 
 func (thisKr *r) Get(key string) string {
@@ -74,5 +93,21 @@ func (thisKr *r) Get(key string) string {
 func (thisKr *r) Close() {
 	if thisKr.kr != nil {
 		thisKr.kr.Close()
+	}
+}
+
+type redisOptions struct {
+	Addr 		string
+	Password 	string
+	DB 			int
+	PoolSize	int
+}
+
+func (thisKr *r) initialized() *redisOptions {
+	return &redisOptions{
+		Addr:		"127.0.0.1:6379",
+		Password:	"",
+		DB:			0,
+		PoolSize:	10,
 	}
 }
