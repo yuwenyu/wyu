@@ -18,7 +18,6 @@ var dbEngines map[int]db
 
 type DB interface {
 	Engine() *xorm.Engine
-	Test() int
 }
 
 type db struct {
@@ -30,43 +29,47 @@ type db struct {
 var _ DB = &db{}
 
 func NewDB(src int) *db {
-	if src <= 0 {
-		src = 1
-	}
+	if src <= 0 { src = 1 }
 
 	var odb *db
 	if v, ok := dbEngines[src]; ok {
 		odb = &v
-		fmt.Println("initialized global")
 	} else {
 		odb = &db{id:src}
-		fmt.Println("initialized New")
 	}
 
 	return odb
 }
 
-func (tdb *db) Engine() *xorm.Engine {
-	if tdb.engine == nil {
-		tdb.instanceMaster()
+func (odbc *db) Engine() *xorm.Engine {
+	if odbc.engine == nil {
+		odbc.instanceMaster()
 	}
 
-	return tdb.engine
+	return odbc.engine
 }
 
-func (tdb *db) Test() int {
-	return tdb.id
-}
+func (odbc *db) instanceMaster() *db {
+	odbc.mx.Lock()
+	defer odbc.mx.Unlock()
 
-func (tdb *db) instanceMaster() *db {
-	tdb.mx.Lock()
-	defer tdb.mx.Unlock()
-
-	if tdb.engine != nil {
-		return tdb
+	if odbc.engine != nil {
+		return odbc
 	}
 
-	ds := tdb.initialized()
+	if len(dbEngines) == 0 {
+		dbEngines = make(map[int]db)
+	} else {
+		if v, ok := dbEngines[odbc.id]; ok {
+			if odbc.engine == nil {
+				odbc.engine = v.engine
+			}
+
+			return odbc
+		}
+	}
+
+	ds := odbc.initDataSource()
 	driverSource := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8",
 		ds.username, ds.password, ds.host, ds.port, ds.table)
 	engine, err := xorm.NewEngine(ds.dn, driverSource)
@@ -83,35 +86,39 @@ func (tdb *db) instanceMaster() *db {
 	// cacher := xorm.NewLRUCacher(xorm.NewMemoryStore(),1000)
 	// engine.SetDefaultCacher(cacher)
 
-	tdb.engine = engine
+	odbc.engine = engine
 
-	dbEngines := make(map[int]db)
-	dbEngines[tdb.id] = *tdb
+	dbEngines[odbc.id] = *odbc
 
-	return tdb
+	return odbc
 }
 
 type dataSource struct {
-	dn string
-	host string
-	port int
-	table string
+	dn 		 string
+	host 	 string
+	port 	 int
+	table 	 string
 	username string
 	password string
 }
 
-func (tdb *db) initialized() dataSource {
-	var src string = strconv.Itoa(tdb.id)
-	var c INI = &ini{}
-	c.LoadByFN("db")
-	port, _ := c.K("db_engine_" + src, "port").Int()
+func (odbc *db) initDataSource() *dataSource {
+	var key string = "db_engine" + StrUL + strconv.Itoa(odbc.id)
+	var c INI = NewIni().LoadByFN("db")
 
-	return dataSource{
-		dn:c.K("db_engine_" + src, "driver").String(),
-		host:c.K("db_engine_" + src, "host").String(),
-		port:port,
-		table:c.K("db_engine_" + src, "table").String(),
-		username:c.K("db_engine_" + src, "username").String(),
-		password:c.K("db_engine_" + src, "password").String(),
+	dn 		:= c.K(key, "driver").String()
+	host 	:= c.K(key, "host").String()
+	port, _ := c.K(key, "port").Int()
+	table 	:= c.K(key, "table").String()
+	username:= c.K(key, "username").String()
+	password:= c.K(key, "password").String()
+
+	return &dataSource{
+		dn:			dn,
+		host:		host,
+		port:		port,
+		table:		table,
+		username:	username,
+		password:	password,
 	}
 }

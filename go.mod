@@ -7,7 +7,6 @@ replace (
 
 	git.apache.org/thrift.git => github.com/apache/thrift v0.12.0
 	github.com/testcontainers/testcontainer-go => github.com/testcontainers/testcontainers-go v0.0.4
-	github.com/yuwenyu/kernel v0.0.0-20190625104352-b887c761d797 => /Users/wyu/Documents/Technologies/Github/repositories/yuwenyu/kernel
 
 	go.etcd.io/etcd => github.com/etcd-io/etcd v3.3.13+incompatible
 
@@ -68,5 +67,5 @@ require (
 	github.com/go-xorm/xorm v0.7.3
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
-	github.com/yuwenyu/kernel v0.0.0-20190625104352-b887c761d797
+	github.com/yuwenyu/kernel v0.0.0-20190625154744-38d78f91cd89
 )

@@ -19,9 +19,13 @@ type indexService struct {
 var _ IndexService = &indexService{}
 
 func NewIndexService() *indexService {
+	var db1 kernel.DB = kernel.NewDB(0)
+	var db2 kernel.DB = kernel.NewDB(2)
+	db1.Engine()
+	db2.Engine()
 	return &indexService{
 		kr:kernel.NewRedis(),
-		mConfigs:models.NewConfigsModel(kernel.NewDB(0).Engine()),
+		mConfigs:models.NewConfigsModel(db1.Engine()),
 	}
 }
 
