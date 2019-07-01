@@ -79,15 +79,17 @@ func (odbc *db) instanceMaster() *db {
 		return nil
 	}
 
-	engine.SetMaxOpenConns(20)
-	engine.SetMaxIdleConns(20)
+	engine.SetMaxOpenConns(ds.maxOpen)
+	engine.SetMaxIdleConns(ds.maxIdle)
 
-	engine.ShowSQL(false)
+	engine.ShowSQL(ds.showedSQL)
 	engine.SetTZDatabase(SysTimeLocation)
 
-	//SQL Cache
-	//cached := xorm.NewLRUCacher(xorm.NewMemoryStore(),1000)
-	//engine.SetDefaultCacher(cached)
+
+	if ds.cachedSQL {
+		cached := xorm.NewLRUCacher(xorm.NewMemoryStore(), 1000)
+		engine.SetDefaultCacher(cached)
+	}
 
 	odbc.engine = engine
 
@@ -97,14 +99,16 @@ func (odbc *db) instanceMaster() *db {
 }
 
 type dataSource struct {
-	dn 		 string
-	host 	 string
-	port 	 int
-	table 	 string
-	username string
-	password string
-	maxOpen	 int
-	maxIdle	 int
+	dn 		 	string
+	host 	 	string
+	port 	 	int
+	table 	 	string
+	username 	string
+	password 	string
+	maxOpen	 	int
+	maxIdle	 	int
+	showedSQL	bool
+	cachedSQL	bool
 }
 
 func (odbc *db) initDataSource() *dataSource {
@@ -113,21 +117,45 @@ func (odbc *db) initDataSource() *dataSource {
 
 	dn 		:= c.K(key, "driver").String()
 	host 	:= c.K(key, "host").String()
-	port, _ := c.K(key, "port").Int()
 	table 	:= c.K(key, "table").String()
 	username:= c.K(key, "username").String()
 	password:= c.K(key, "password").String()
-	max_open, _ := c.K(key, "max_open").Int()
-	max_idle, _ := c.K(key, "max_idle").Int()
+
+	port, errPort := c.K(key, "port").Int()
+	if errPort != nil {
+		port = 3306
+	}
+
+	maxOpen, errOpen := c.K(key, "max_open").Int()
+	if errOpen != nil {
+		maxOpen = 50
+	}
+
+	maxIdle, errIdle := c.K(key, "max_idle").Int()
+	if errIdle != nil {
+		maxIdle = 200
+	}
+
+	showedSQL, errShowedSQL := c.K(key, "showed_sql").Bool()
+	if errShowedSQL != nil {
+		showedSQL = false
+	}
+
+	cachedSQL, errCachedSQL := c.K(key, "cached_sql").Bool()
+	if errCachedSQL != nil {
+		cachedSQL = false
+	}
 
 	return &dataSource{
-		dn:			dn,
-		host:		host,
-		port:		port,
-		table:		table,
-		username:	username,
-		password:	password,
-		maxOpen:	max_open,
-		maxIdle:	max_idle,
+		dn:       	dn,
+		host:     	host,
+		port:     	port,
+		table:    	table,
+		username: 	username,
+		password: 	password,
+		maxOpen:  	maxOpen,
+		maxIdle:  	maxIdle,
+		showedSQL:	showedSQL,
+		cachedSQL:	cachedSQL,
 	}
 }
