@@ -8,12 +8,14 @@ import (
 	"strings"
 
 	"github.com/yuwenyu/kernel"
+
+	"wyu/config"
 	"wyu/routes"
 )
 
 const (
 	directoryView string = "resources/templates/views/"
-	ginPort string = "8080"
+	ginPort string = "8888"
 )
 
 func init() {
@@ -36,22 +38,31 @@ func (ad *autoload) running() {
 	/**
 	 * TODO: Loading Templates
 	 */
-	bTpl, _ := ad.kernel.Ini.K("common_cfg","template_status").Bool()
+	bTpl, _ := ad.kernel.Ini.K(
+		config.MapConfLists[config.ConfCommons][0],
+		config.MapConfParam[config.MapConfLists[config.ConfCommons][0]][0],
+	).Bool()
 	if bTpl {
 		rHttp := routes.New(r)
 		rHttp.HttpRoutes()
 
-		strResources := ad.kernel.Ini.K("template_root","resources").String()
+		strResources := ad.kernel.Ini.K(
+			config.MapConfLists[config.ConfTemplates][1],
+			config.MapConfParam[config.MapConfLists[config.ConfTemplates][1]][2],
+		).String()
 		if strResources == "" {
 			panic("Templates Resources nil, Please check the configure!")
 		}
 
-		strDirectoryViews := ad.kernel.Ini.K("template_root","directory_views").String()
+		strDirectoryViews := ad.kernel.Ini.K(
+			config.MapConfLists[config.ConfTemplates][1],
+			config.MapConfParam[config.MapConfLists[config.ConfTemplates][1]][1],
+		).String()
 		if strDirectoryViews == "" {
 			strDirectoryViews = directoryView
 		}
 
-		arrResources := strings.Split(strResources, ":")
+		arrResources := strings.Split(strResources, kernel.StrColon)
 		objTPL := ad.kernel.GinTemplate()
 		for _, skeleton := range arrResources {
 			views, _ := ioutil.ReadDir(strDirectoryViews + skeleton)
@@ -63,7 +74,10 @@ func (ad *autoload) running() {
 		r.HTMLRender = objTPL
 	}
 
-	strPort := ad.kernel.Ini.K("common_server","port").String()
+	strPort := ad.kernel.Ini.K(
+		config.MapConfLists[config.ConfCommons][2],
+		config.MapConfParam[config.MapConfLists[config.ConfCommons][2]][0],
+	).String()
 	if strPort == "" {
 		r.Run(kernel.StrColon + ginPort)
 	} else {

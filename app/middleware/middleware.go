@@ -18,6 +18,12 @@ func M() gin.HandlerFunc {
 	}
 }
 
+func S() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Next()
+	}
+}
+
 func mLn(domain string) string {
 	strPreDomain := strings.Split(domain, ".")
 	switch strPreDomain[0] {
